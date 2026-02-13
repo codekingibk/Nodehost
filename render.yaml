@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: nodehost
+    runtime: node
+    region: oregon
+    buildCommand: npm run render-build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 18.18.0
+      - key: MONGO_URI
+        value: mongodb+srv://gboyegaibk:Oyinlola%40007@cluster0.ckokr6u.mongodb.net/?appName=Cluster0
+      - key: CLERK_SECRET_KEY
+        value: sk_test_tElgVdgTbxxpaCNaVmC7vjeaYu2yR2yVzpRnIih4FM
+      - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        value: pk_test_d2FybS1oZW4tNi5jbGVyay5hY2NvdW50cy5kZXYk
+      - key: NODE_ENV
+        value: production
