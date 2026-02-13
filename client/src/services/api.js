@@ -5,7 +5,11 @@ export const setTokenProvider = (provider) => {
     getToken = provider;
 };
 
-const BASE_URL = 'http://localhost:10000';
+// Use window.location.origin in production, fallback to localhost in dev
+let BASE_URL = 'http://localhost:10000';
+if (typeof window !== 'undefined' && window.location && window.location.origin) {
+    BASE_URL = window.location.origin;
+}
 
 export const api = {
     get: async (url) => {
