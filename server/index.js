@@ -68,16 +68,14 @@ app.get('/health', (req, res) => {
 });
 
 // Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
-    
-    app.get('*', (req, res) => {
-        // If not an API route, serve index.html
-        if (!req.path.startsWith('/api')) {
-             res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-        }
-    });
-}
+// Serve frontend for all non-API routes (for Render, Vercel, etc)
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get('*', (req, res) => {
+    // If not an API route, serve index.html
+    if (!req.path.startsWith('/api')) {
+        res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    }
+});
 
 const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => {
